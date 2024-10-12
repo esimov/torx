@@ -688,3 +688,34 @@ func Example_unzip() {
 	// Output:
 	// [[one two] [1 2]]
 }
+
+func TestSlice_ToMap(t *testing.T) {
+	type some_struct struct {
+		Id    uint
+		Title string
+	}
+
+	s1 := some_struct{Id: 1, Title: "foo"}
+	s2 := some_struct{Id: 10, Title: "bar"}
+	s3 := some_struct{Id: 100, Title: "baz"}
+
+	input := []some_struct{
+		s1,
+		s2,
+		s3,
+	}
+
+	result := ToMap(input, func(x some_struct) uint { return x.Id })
+
+	assert := assert.New(t)
+	assert.True(len(result) == 3)
+	assert.Equal(map[uint]some_struct{s1.Id: s1, s2.Id: s2, s3.Id: s3}, result)
+}
+
+func Example_toMap() {
+	slice := []int{1, 2, 3}
+	result := ToMap(slice, func(x int) int { return x })
+
+	fmt.Println(result)
+	// {1: 1, 2: 2, 3: 3}
+}

@@ -547,3 +547,13 @@ func ToSlice[T any](args ...T) []T {
 
 	return slice
 }
+
+// ToMap convert slice to map
+func ToMap[T, K comparable](slice []T, fn func(x T) K) map[K]T {
+	result := make(map[K]T, len(slice))
+	for _, v := range slice {
+		k := fn(v)
+		result[k] = v
+	}
+	return result
+}
