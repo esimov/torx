@@ -2210,6 +2210,37 @@ Zip iteratively merges together the values of the slice parameters with the valu
 </p>
 </details>
 
+## func [ToMap](<https://github.com/esimov/gogu/blob/master/slice.go#L552>)
+
+```go
+func ToMap[T, K comparable](slice []T, fn func(x T) K) map[K]T
+```
+
+Converts slice to map, where keys are generated with `fn` function.
+
+<details><summary>Example</summary>
+<p>
+
+```go
+{
+	slice := []int{1, 2, 3}
+	result := ToMap(slice, func(x int) int { return x })
+}
+```
+
+#### Output
+
+```
+{1: 1, 2: 2, 3: 3}
+```
+
+</p>
+</details>
+
+
+
+
+
 ## type [Bound](<https://github.com/esimov/gogu/blob/master/find.go#L180-L182>)
 
 ```go
